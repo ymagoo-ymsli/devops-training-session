@@ -1,9 +1,10 @@
 name: CI/CD Pipeline  # Defines the name of the workflow
 
 on:
-  push:
-    branches:
-      - main  # Triggers the workflow only when code is pushed to the 'main' branch
+  # push:
+  #   branches:
+  #     - main  # Triggers the workflow only when code is pushed to the 'main' branch
+  workflow_dispatch:
 
 jobs:
   build:

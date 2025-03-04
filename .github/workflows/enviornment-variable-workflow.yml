@@ -1,0 +1,22 @@
+# Name of the workflow
+name: Greeting on variable day
+
+# Trigger the workflow manually using workflow_dispatch
+on:
+  workflow_dispatch
+
+# Set a default environment variable at the workflow level
+env:
+  DAY_OF_WEEK: Monday # This sets the default day to "Monday" for the workflow
+
+jobs:
+  greeting_job:  # Define a job called 'greeting_job'
+    runs-on: ubuntu-latest  # The job will run on the latest version of Ubuntu
+    env:
+      Greeting: Hello ETI Team  # Define an environment variable 'Greeting' with the value "Hello" for the job
+    steps:
+      - name: "Today is Tuesday"  # Step description
+        env:
+          First_Name: Deepak  # Set a 'First_Name' variable for this specific step
+          DAY_OF_WEEK: Friday
+        run: echo "Job Level- $Greeting Step Level- $First_Name. Workflow Level- Today is $DAY_OF_WEEK!"  # Output a greeting message using the environment variables

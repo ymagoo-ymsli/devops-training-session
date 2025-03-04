@@ -20,3 +20,9 @@ jobs:
           First_Name: Deepak  # Set a 'First_Name' variable for this specific step
           DAY_OF_WEEK: Friday
         run: echo "Job Level- $Greeting Step Level- $First_Name. Workflow Level- Today is $DAY_OF_WEEK!"  # Output a greeting message using the environment variables
+
+  test_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Test"
+        run: echo "Today is $DAY_OF_WEEK!"

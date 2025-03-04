@@ -19,7 +19,7 @@ jobs:
 # The uses keyword allows you to include actions created by others (such as those available in the GitHub Marketplace) 
 # or your own custom actions within your workflows
       - name: "Upload file as an artifact"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: file # Name of the artifact
           path: file.txt # Path to the file to upload

@@ -1,0 +1,31 @@
+name: Pass Values Between Jobs With Github Output  # Name of the workflow
+
+on:
+  workflow_dispatch:  # Triggered manually via GitHub UI
+
+jobs:
+  job1:  # First job definition
+    runs-on: ubuntu-latest  # This job runs on the latest Ubuntu runner
+    
+    # Define outputs that can be passed to other jobs
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}  # Get the output of 'step1' and assign it to 'output1'
+      output2: ${{ steps.step2.outputs.test }}  # Get the output of 'step2' and assign it to 'output2'
+    
+    steps:  # List of steps for this job
+      - id: step1  # Step with ID 'step1'
+        run: echo "test=hello" >> "$GITHUB_OUTPUT"  # Create an output with a value 'test=hello' and append to GITHUB_OUTPUT
+
+      - id: step2  # Step with ID 'step2'
+        run: echo "test=world" >> "$GITHUB_OUTPUT"  # Create an output with a value 'test=world' and append to GITHUB_OUTPUT
+
+  job2:  # Second job definition
+    runs-on: ubuntu-latest  # This job also runs on the latest Ubuntu runner
+    needs: job1  # This job depends on job1 completing successfully before it can run
+    env:
+      OUTPUT1: ${{ needs.job1.outputs.output1 }}
+      OUTPUT2: ${{ needs.job1.outputs.output2 }}
+    
+    steps:  # List of steps for this job
+    - name: Print out variables from previous job
+      run: echo "$OUTPUT1 $OUTPUT2"  # Print the values of OUTPUT1 and OUTPUT2, which come from job1

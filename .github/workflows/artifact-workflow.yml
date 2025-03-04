@@ -31,7 +31,7 @@ jobs:
     needs: job_1 # Ensures this job runs after job_1 completes successfully
     steps:
       - name: "Download the artifact"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: file # Specify the name of the artifact to download
       - name: "Printing the file content"
